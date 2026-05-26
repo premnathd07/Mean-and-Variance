@@ -51,60 +51,53 @@ It shows the distance of a random variable from its mean. It is calcualted as
 ```
 DEVELOPED BY : PREM NATH D
 Reg No : 212225030217
-Declaring the value of n
 
 import numpy as np
-n = int(input("Enter the value of n : "))
-print("Value of n =", n)
-```
-```
-Getting the inputs
 
-InputVal = {}
-for i in range(1, n+1):
-    val = int(input(f"Enter the value no {i} : "))
-    try:
-        InputVal[val] += 1
-    except:
-        InputVal[val] = 1
-print(f"{i} Values Collected Successfully")
-```
-```
-Finding Mean
+L = [int(i) for i in input("Enter arrival data: ").split()]
 
-mean = 0
-for key, val in InputVal.items():
-    mean += key*(val/n)
-print(f"Mean = {mean:.3f}")
-```
-```
-Finding Variance
+N = len(L)
+M = max(L)
 
-ex2 = 0
-for key, val in InputVal.items():
-    ex2 += ((key**2) * val/n)
-var = ex2 - mean**2
-print(f"Variance : {var:.3f}")
-```
-```
-Finding Standard Deviation
+x = []
+f = []
 
-from math import sqrt
-sdtDeviation = sqrt(var)
-print(f"Standard Deviation = {sdtDeviation:.3f}")
+for i in range(M + 1):
+    c = 0
+    for j in range(N):
+        if L[j] == i:
+            c = c + 1
+    f.append(c)
+    x.append(i)
+
+sf = np.sum(f)
+
+p = []
+
+for i in range(M + 1):
+    p.append(f[i] / sf)
+
+print("x\tP(x)")
+for i in range(len(x)):
+    print(x[i], "\t", p[i])
+
+mean = np.inner(x, p)
+
+EX2 = np.inner(np.square(x), p)
+
+var = EX2 - mean**2
+
+SD = np.sqrt(var)
+
+print("The Mean arrival rate is %.3f" % mean)
+print("The Variance of arrival from feeder is %.3f" % var)
+print("The Standard deviation of arrival from feeder is %.3f" % SD)
 ```
 # Output :
 
-Refer to the following images to view the output of the program
+<img width="780" height="337" alt="image" src="https://github.com/user-attachments/assets/d98fccbe-34ed-43ef-a904-5ca2b93aa542" />
 
 
 
 # Results :
 The mean and variance of arrivals of objects from feeder using probability distribution are calculated.
-
-<img width="490" height="170" alt="image" src="https://github.com/user-attachments/assets/954fbeb7-b747-47a7-8ca3-0246bd3ca165" />
-<img width="490" height="256" alt="image" src="https://github.com/user-attachments/assets/794f1fcd-a8bd-4001-9b2f-29c30ee9fa37" />
-<img width="491" height="175" alt="image" src="https://github.com/user-attachments/assets/28785d95-c030-4435-9200-de1e6b816a10" />
-<img width="490" height="201" alt="image" src="https://github.com/user-attachments/assets/1f8a04ba-e60b-429d-9fa1-1f79f0e7105d" />
-<img width="487" height="164" alt="image" src="https://github.com/user-attachments/assets/ce817dbd-666c-4f0e-928c-0dd26e139c43" />
-
